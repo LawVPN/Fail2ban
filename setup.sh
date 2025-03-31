@@ -2,16 +2,16 @@
 clear
 apt update
 apt install fail2ban ufw -y
-echo -e "$BC┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
-echo -e "┃$GB1                   ${BW}FAIL2BAN MENU                   $RR$BC┃"
-echo -e "$BC┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫"
+echo -e "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
+echo -e "┃                   FAIL2BAN MENU                   ┃"
+echo -e "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫"
 if [ ! -f /etc/fail2ban/jail.local ]; then
     isPortAvailable=$(grep "^Port " /etc/ssh/sshd_config)
     if [ -z "$isPortAvailable" ]; then
         sed -i '/^#Port /s/^#//' /etc/ssh/sshd_config
     fi
     currentPort=$(grep "^Port " /etc/ssh/sshd_config | awk '{print $2}')
-    wget -qO /etc/fail2ban/jail.local https://github.com/LawVPN/Noobz/raw/refs/heads/main/fail2ban/jail
+    wget -qO /etc/fail2ban/jail.local https://raw.githubusercontent.com/LawVPN/Noobz/refs/heads/main/fail2ban/jail
     sed -i 's/^port =.*/port = '"$currentPort"'/' /etc/fail2ban/jail.local
     ufwConf=$(cat /etc/fail2ban/action.d/ufw.conf | grep "blocktype = " | awk '{print $3}')
     if [[ "$ufwConf" == "reject" ]]; then
@@ -30,12 +30,24 @@ if [ ! -f /etc/fail2ban/jail.local ]; then
     echo -e "fail2ban-client status sshd" >> /root/log
     echo -e "tail -f /var/log/fail2ban.log" >> /root/log
     chmod +x /root/log
+    cd; clear
+    echo -e "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
+    echo -e "┃                   FAIL2BAN MENU                   ┃"
+    echo -e "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫"
+    echo -e "┃ Fail2ban is ready to use!"
+    echo -e "┃ Type ./log to see the result"
+    echo -e "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫"
+    rm /tmp/fail2ban/setup.sh
 else
-    echo -e "$BC┃ $BY[WARN]$BW Fail2ban is configured"
-    echo -e "$BC┃ $BY[WARN]$BW Want to re-configure?"
-    echo -e "$BC┃ $BB1[NOTE]$BW [Y/y] to accept"
-    echo -e "$BC┃ $BB1[NOTE]$BW [N/n] to decline"
-    echo -e "$BC┃ $BB1[NOTE]$BW [S/s] to stop Fail2ban and UFW"
+    clear
+    echo -e "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
+    echo -e "┃                   FAIL2BAN MENU                   ┃"
+    echo -e "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫"
+    echo -e "┃ [WARN] Fail2ban is configured"
+    echo -e "┃ [WARN] Want to re-configure?"
+    echo -e "┃ [NOTE] [Y/y] to accept"
+    echo -e "┃ [NOTE] [N/n] to decline"
+    echo -e "┃ [NOTE] [S/s] to stop Fail2ban and UFW"
     echo -e ""
     echo -ne "Choose: "; read isReConfigure
     if [[ "$isReConfigure" == "Y" || "$isReConfigure" == "y" ]]; then
@@ -43,7 +55,8 @@ else
         systemctl stop fail2ban
         ufw disable
         rm /etc/fail2ban/jail.local
-        fail2banMenu
+        wget -O /tmp/fail2ban/setup.sh https://raw.githubusercontent.com/LawVPN/Fail2ban/refs/heads/main/setup.sh
+        bash /tmp/fail2ban/setup.sh
     elif [[ "$isReConfigure" == "S" || "$isReConfigure" == "s" ]]; then
         systemctl disable fail2ban
         systemctl stop fail2ban

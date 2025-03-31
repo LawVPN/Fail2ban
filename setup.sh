@@ -1,5 +1,7 @@
 #!/bin/bash
 clear
+apt update
+apt install fail2ban ufw -y
 echo -e "$BC┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
 echo -e "┃$GB1                   ${BW}FAIL2BAN MENU                   $RR$BC┃"
 echo -e "$BC┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫"

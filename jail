@@ -1,0 +1,12 @@
+[DEFAULT]
+bantime = -1
+banaction = ufw
+findtime = 1d
+maxretry = 1
+
+[sshd]
+enabled = true
+port =
+filter = sshd
+logpath = /var/log/auth.log
+maxretry = 1

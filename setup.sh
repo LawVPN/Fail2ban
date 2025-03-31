@@ -33,7 +33,7 @@ if [ ! -f /etc/fail2ban/jail.local ]; then
     chmod +x /root/log
     cd; clear
     echo -e "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
-    echo -e "┃                   FAIL2BAN MENU                   ┃"
+    echo -e "┃                   FAIL2BAN MENU                    ┃"
     echo -e "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫"
     echo -e "┃ Fail2ban is ready to use!"
     echo -e "┃ Type ./log to see the result"
@@ -42,7 +42,7 @@ if [ ! -f /etc/fail2ban/jail.local ]; then
 else
     clear
     echo -e "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
-    echo -e "┃                   FAIL2BAN MENU                   ┃"
+    echo -e "┃                   FAIL2BAN MENU                    ┃"
     echo -e "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫"
     echo -e "┃ [WARN] Fail2ban is configured"
     echo -e "┃ [WARN] Want to re-configure?"

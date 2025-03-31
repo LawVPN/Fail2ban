@@ -3,7 +3,7 @@ apt update
 apt install fail2ban ufw -y
 clear
 echo -e "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
-echo -e "┃                   FAIL2BAN MENU                   ┃"
+echo -e "┃                   FAIL2BAN MENU                    ┃"
 echo -e "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫"
 if [ ! -f /etc/fail2ban/jail.local ]; then
     isPortAvailable=$(grep "^Port " /etc/ssh/sshd_config)

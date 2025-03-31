@@ -28,7 +28,7 @@ if [ ! -f /etc/fail2ban/jail.local ]; then
     echo -e '#!/bin/bash' > /root/log
     echo -e "clear" >> /root/log
     echo -e "fail2ban-client status sshd" >> /root/log
-    printf "echo -e \"\e[1;32mType ctrl+c to stop\e[0m\"" | sudo tee -a /root/log
+    echo -e "echo -e \"\e[1;32mType ctrl+c to stop\e[0m\"" >> /root/log
     echo -e "tail -f /var/log/fail2ban.log" >> /root/log
     chmod +x /root/log
     cd; clear

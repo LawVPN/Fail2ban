@@ -8,5 +8,5 @@ maxretry = 1
 enabled = true
 port =
 filter = sshd
-logpath = /var/log/auth.log
-maxretry = 1
+backend = systemd
+logpath = journal

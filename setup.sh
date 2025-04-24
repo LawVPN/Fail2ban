@@ -11,7 +11,7 @@ if [ ! -f /etc/fail2ban/jail.local ]; then
         sed -i '/^#Port /s/^#//' /etc/ssh/sshd_config
     fi
     currentPort=$(grep "^Port " /etc/ssh/sshd_config | awk '{print $2}')
-    wget -qO /etc/fail2ban/jail.local https://raw.githubusercontent.com/LawVPN/Noobz/refs/heads/main/fail2ban/jail
+    wget -qO /etc/fail2ban/jail.local https://raw.githubusercontent.com/LawVPN/Fail2ban/refs/heads/main/jail
     sed -i 's/^port =.*/port = '"$currentPort"'/' /etc/fail2ban/jail.local
     ufwConf=$(cat /etc/fail2ban/action.d/ufw.conf | grep "blocktype = " | awk '{print $3}')
     if [[ "$ufwConf" == "reject" ]]; then
@@ -39,7 +39,7 @@ if [ ! -f /etc/fail2ban/jail.local ]; then
     echo -e "┃ Type ./log to see the result"
     echo -e "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫"
     rm /tmp/fail2ban.sh
-    rm /tmp/refail2ban.sh
+    #rm /tmp/refail2ban.sh
 else
     clear
     echo -e "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
@@ -57,8 +57,8 @@ else
         systemctl stop fail2ban
         ufw disable
         rm /etc/fail2ban/jail.local
-        wget -O /tmp/refail2ban.sh https://raw.githubusercontent.com/LawVPN/Fail2ban/refs/heads/main/setup.sh
-        bash /tmp/refail2ban.sh
+        wget -O /tmp/fail2ban.sh https://raw.githubusercontent.com/LawVPN/Fail2ban/refs/heads/main/setup.sh
+        bash /tmp/fail2ban.sh
     elif [[ "$isReConfigure" == "S" || "$isReConfigure" == "s" ]]; then
         systemctl disable fail2ban
         systemctl stop fail2ban

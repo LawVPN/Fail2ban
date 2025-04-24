@@ -39,7 +39,7 @@ if [ ! -f /etc/fail2ban/jail.local ]; then
     echo -e "┃ Type ./log to see the result"
     echo -e "┣━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┫"
     rm /tmp/fail2ban.sh
-    rm /tmp/reconf/fail2ban.sh
+    rm /tmp/refail2ban.sh
 else
     clear
     echo -e "┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┓"
@@ -57,8 +57,8 @@ else
         systemctl stop fail2ban
         ufw disable
         rm /etc/fail2ban/jail.local
-        wget -O /tmp/reconf/fail2ban.sh https://raw.githubusercontent.com/LawVPN/Fail2ban/refs/heads/main/setup.sh
-        bash /tmp/reconf/fail2ban.sh
+        wget -O /tmp/refail2ban.sh https://raw.githubusercontent.com/LawVPN/Fail2ban/refs/heads/main/setup.sh
+        bash /tmp/refail2ban.sh
     elif [[ "$isReConfigure" == "S" || "$isReConfigure" == "s" ]]; then
         systemctl disable fail2ban
         systemctl stop fail2ban

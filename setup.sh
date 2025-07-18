@@ -18,8 +18,9 @@ if [ ! -f /etc/fail2ban/jail.local ]; then
         sed -i "s/^blocktype = reject/blocktype = deny/" /etc/fail2ban/action.d/ufw.conf
     fi
     ufw default deny
-    ufw allow 443
-    ufw allow 80
+    ufw allow 443             # Nginx
+    ufw allow 80              # Nginx
+    ufw allow 777             # Stunnel4
     ufw allow $currentPort
     ufw enable
     systemctl enable fail2ban
